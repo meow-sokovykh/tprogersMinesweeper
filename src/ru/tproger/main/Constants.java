@@ -27,7 +27,7 @@ public class Constants {
 	/* Параметры окна */
     public static final int SCREEN_WIDTH = COUNT_CELLS_X *CELL_SIZE;
     public static final int SCREEN_HEIGHT = COUNT_CELLS_Y *CELL_SIZE;
-    public static final String SCREEN_NAME = "Tproger's 2048";
+    public static final String SCREEN_NAME = "Tproger's Minesweeper";
 
 	/* Шанс спавна мины */
     public static final int SPAWN_CHANCE_OF_MINE = 15; //%
