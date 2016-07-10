@@ -84,8 +84,30 @@ public class GameField {
      * @param click Информация о переданном клике
      * @return Возвращает результат клика (Если ничего важного не произошло -- ClickResult.REGULAR)
      */
-    public ClickResult recieveClick(Click click) {
-        return this.theField[click.x][click.y].recieveClick(click.button);
+    public void recieveClick(Click click) {
+        ClickResult clickResult = this.theField[click.x][click.y].recieveClick(click.button);
+        switch(clickResult) {
+            case EXPLOSED:
+                showAll();
+                break;
+            case OPENED:
+                if(getMinesNear(click.x, click.y) == 0) {
+                    for (int i = -1; i < 2; i++) {
+                        for (int j = -1; j < 2; j++) {
+                            if ((click.x + i >= 0) && (click.x + i < COUNT_CELLS_X)
+                                    && (click.y + j >= 0) && (click.y + j < COUNT_CELLS_Y)) {
+                                Click pseudoClick = new Click(click.x + i, click.y + j, click.button);
+                                recieveClick(pseudoClick);
+                            }
+                        }
+                    }
+                }
+                break;
+            case REGULAR:
+            default:
+                //ignore
+                break;
+        }
     }
 
     /**

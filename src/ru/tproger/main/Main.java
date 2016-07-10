@@ -19,9 +19,6 @@ import ru.tproger.mouse.lwjglmodule.LwjglMouseHandleModule;
 
 import java.util.LinkedList;
 
-import static ru.tproger.main.Constants.COUNT_CELLS_X;
-import static ru.tproger.main.Constants.COUNT_CELLS_Y;
-
 /**
  *
  * Главный управляющий класс.
@@ -88,28 +85,7 @@ public class Main {
      */
     private static void logic() {
         for(Click click : clicksStack) {
-            ClickResult clickResult = gameField.recieveClick(click);
-            switch(clickResult) {
-                case EXPLOSED:
-                    gameField.showAll();
-                    break;
-                case OPENED:
-                    if(gameField.getMinesNear(click.x, click.y) == 0) {
-                        for (int i = -1; i < 2; i++) {
-                            for (int j = -1; j < 2; j++) {
-                                if ((click.x + i >= 0) && (click.x + i < COUNT_CELLS_X)
-                                        && (click.y + j >= 0) && (click.y + j < COUNT_CELLS_Y)) {
-                                    gameField.show(click.x + i, click.y + j);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case REGULAR:
-                default:
-                    //ignore
-                    break;
-            }
+           gameField.recieveClick(click);
         }
     }
 
